@@ -1,0 +1,133 @@
+/* DiscoverPage.css */
+
+.discover-page {
+    padding: 20px;
+}
+
+/* History Section */
+.history-section {
+    background-color: #e6f3f5;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.history-section .flex-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.discover-page .history-section .flex-container {
+    text-align: center;
+}
+
+.history-section img {
+    border-radius: 8px;
+}
+
+/* Landmarks Section */
+.landmarks-section {
+    background-color: #cce7ec;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.landmarks-section .flex-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.discover-page .landmarks-section .flex-container{
+    text-align: center;
+}
+
+.video-container iframe {
+    border-radius: 8px;
+}
+
+/* Landmarks Gallery */
+.landmarks-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.landmark-card {
+    flex: 1 1 200px;
+    max-width: 220px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 10px;
+}
+
+.landmark-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.landmark-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.landmark-card h3 {
+    padding: 10px 0;
+    font-size: 18px;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    /* Stack elements vertically in history section */
+    .history-section .flex-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .history-section img {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 15px;
+    }
+
+    /* Stack elements vertically in landmarks section */
+    .landmarks-section .flex-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .video-container iframe {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Adjust landmark gallery layout */
+    .landmarks-gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .landmark-card {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .landmark-card h3 {
+        font-size: 18px;
+    }
+}
