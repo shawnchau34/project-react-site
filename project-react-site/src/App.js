@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import './css/App.css';
@@ -13,7 +13,7 @@ import MunchiesPage from './pages/MunchiesPage';
 
 function App() {
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Router>
             <div className="app">
                 <Header />
                 <main className="content">
@@ -27,7 +27,7 @@ function App() {
                 </main>
                 <Footer />
             </div>
-        </BrowserRouter>
+        </Router>
     );
 }
 
