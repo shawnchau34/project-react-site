@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/project-reate-site/static/css/main.f59fdcdc.css",
+    "main.js": "/project-reate-site/static/js/main.e696c4f8.js",
+    "index.html": "/project-reate-site/index.html",
+    "main.f59fdcdc.css.map": "/project-reate-site/static/css/main.f59fdcdc.css.map",
+    "main.e696c4f8.js.map": "/project-reate-site/static/js/main.e696c4f8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f59fdcdc.css",
+    "static/js/main.e696c4f8.js"
+  ]
+}
