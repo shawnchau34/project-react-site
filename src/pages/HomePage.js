@@ -23,13 +23,13 @@ function HomePage() {
                         historical landmarks to Michelin-rated food, Vietnam is a must-see destination.
                         </p>
                     </div>
-                    <img src="/images/overview.jpg" width="350" height="270" alt="Vietnam overview" />
+                    <img src="project-react-site/images/overview.jpg" width="350" height="270" alt="Vietnam overview" />
                 </div>
             </section>
 
             <section className="popular-destinations">
                 <div className="flex-container">
-                    <img src="/images/map.jpg" width="350" height="400" alt="Vietnam map" />
+                    <img src="project-react-site/images/map.jpg" width="350" height="400" alt="Vietnam map" />
                     <div className="columns">
                         <h2>Popular Destinations</h2>
                         <p>

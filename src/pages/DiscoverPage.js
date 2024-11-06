@@ -4,10 +4,10 @@ import Modal from '../components/Modal';
 import '../css/pages-styling/DiscoverPage.css';
 
 const landmarks = [
-    { name: "Ho Chi Minh City", image: "/images/hcm.jpg", description: "A vibrant city with rich history.", link: "https://en.wikipedia.org/wiki/Ho_Chi_Minh_City" },
-    { name: "Saigon", image: "/images/saigon.jpeg", description: "The largest city in Vietnam, full of life.", link: "https://en.wikipedia.org/wiki/Saigon" },
-    { name: "Hanoi", image: "/images/temple.jpg", description: "The capital city, blending history and modernity.", link: "https://en.wikipedia.org/wiki/Hanoi" },
-    { name: "Hạ Long Bay", image: "/images/discoverbay.jpg", description: "Famous for its emerald waters and limestone islands.", link: "https://en.wikipedia.org/wiki/H%E1%BA%A1_Long_Bay" }
+    { name: "Ho Chi Minh City", image: "project-react-site/images/hcm.jpg", description: "A vibrant city with rich history.", link: "https://en.wikipedia.org/wiki/Ho_Chi_Minh_City" },
+    { name: "Saigon", image: "project-react-site/images/saigon.jpeg", description: "The largest city in Vietnam, full of life.", link: "https://en.wikipedia.org/wiki/Saigon" },
+    { name: "Hanoi", image: "project-react-site/images/temple.jpg", description: "The capital city, blending history and modernity.", link: "https://en.wikipedia.org/wiki/Hanoi" },
+    { name: "Hạ Long Bay", image: "project-react-site/images/discoverbay.jpg", description: "Famous for its emerald waters and limestone islands.", link: "https://en.wikipedia.org/wiki/H%E1%BA%A1_Long_Bay" }
 ];
 
 function DiscoverPage() {
@@ -26,7 +26,7 @@ function DiscoverPage() {
             <section className="history-section">
                 <h2>Vietnam's History</h2>
                 <div className="flex-container">
-                    <img src="/images/history.jpg" alt="Vietnam history" height="350" width="350" />
+                    <img src="project-react-site/images/history.jpg" alt="Vietnam history" height="350" width="350" />
                     <div className="columns">
                         <p>Vietnam's history is rich and complex, shaped by centuries of cultural influences and conflicts. The country has a long tradition of resilience, having been ruled by various dynasties and foreign powers, including China for over a thousand years. Vietnam's more recent history is marked by its struggle for independence from French colonial rule in the mid-20th century, leading to the Vietnam War, a pivotal conflict between the communist North and the U.S.-backed South. After the war ended in 1975, the country was reunified, and Vietnam has since evolved into a dynamic nation with a vibrant culture and growing economy.</p>
                     </div>
