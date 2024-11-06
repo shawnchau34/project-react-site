@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/project-react-site/static/css/main.f59fdcdc.css",
-    "main.js": "/project-react-site/static/js/main.44159679.js",
-    "index.html": "/project-react-site/index.html",
-    "main.f59fdcdc.css.map": "/project-react-site/static/css/main.f59fdcdc.css.map",
-    "main.44159679.js.map": "/project-react-site/static/js/main.44159679.js.map"
+    "main.css": "/discover-vietnam/static/css/main.f59fdcdc.css",
+    "main.js": "/discover-vietnam/static/js/main.054008ea.js",
+    "index.html": "/discover-vietnam/index.html",
+    "main.f59fdcdc.css.map": "/discover-vietnam/static/css/main.f59fdcdc.css.map",
+    "main.054008ea.js.map": "/discover-vietnam/static/js/main.054008ea.js.map"
   },
   "entrypoints": [
     "static/css/main.f59fdcdc.css",
-    "static/js/main.44159679.js"
+    "static/js/main.054008ea.js"
   ]
 }
