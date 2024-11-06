@@ -29,7 +29,7 @@ function HomePage() {
 
             <section className="popular-destinations">
                 <div className="flex-container">
-                    <img src="project-react-site/images/map.jpg" width="350" height="400" alt="Vietnam map" />
+                    <img src="/images/map.jpg" width="350" height="400" alt="Vietnam map" />
                     <div className="columns">
                         <h2>Popular Destinations</h2>
                         <p>
