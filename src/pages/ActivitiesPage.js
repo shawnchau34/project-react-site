@@ -4,10 +4,10 @@ import Modal from '../components/Modal';
 import '../css/pages-styling/ActivitiesPage.css';
 
 const activities = [
-    { name: "Heritage Line Ylang Cruise", image: "/images/cruise.jpg", description: "A luxury cruise through Ha Long Bay.", link: "https://www.example.com/cruise" },
-    { name: "The Marble Mountains", image: "/images/mm.jpg", description: "A cluster of marble and limestone hills in Da Nang.", link: "https://www.example.com/marble_mountains" },
-    { name: "Cat Ba Island", image: "/images/island.jpg", description: "A serene island with breathtaking landscapes.", link: "https://www.example.com/cat_ba_island" },
-    { name: "The Old Quarter", image: "/images/quarter.jpg", description: "A historic area in Hanoi, known for its bustling markets.", link: "https://www.example.com/old_quarter" }
+    { name: "Heritage Line Ylang Cruise", image: "images/cruise.jpg", description: "A luxury cruise through Ha Long Bay.", link: "https://www.example.com/cruise" },
+    { name: "The Marble Mountains", image: "images/mm.jpg", description: "A cluster of marble and limestone hills in Da Nang.", link: "https://www.example.com/marble_mountains" },
+    { name: "Cat Ba Island", image: "images/island.jpg", description: "A serene island with breathtaking landscapes.", link: "https://www.example.com/cat_ba_island" },
+    { name: "The Old Quarter", image: "images/quarter.jpg", description: "A historic area in Hanoi, known for its bustling markets.", link: "https://www.example.com/old_quarter" }
 ];
 
 function ActivitiesPage() {
@@ -32,7 +32,7 @@ function ActivitiesPage() {
                         <p>Vietnam is a paradise for nature lovers and adventure seekers alike. Mui Ne offers thrilling sand dunes for sandboarding and kite surfing, while the Mekong Delta provides a peaceful experience of floating markets, lush landscapes, and river cruises. Hoi An, a UNESCO World Heritage site, invites visitors to stroll through its ancient streets, lit by colorful lanterns, and experience its rich cultural heritage through cooking classes and traditional craftsmanship. For those interested in wildlife, Cát Tiên National Park is home to diverse ecosystems and endangered species, ideal for trekking and birdwatching. Whether you’re exploring the dense jungles of Ba Be National Park or enjoying a scenic motorbike ride along the Hai Van Pass, Vietnam’s diverse landscapes and activities promise unforgettable experiences.</p>
                     </div>
                     <div className="media">
-                        <img src="project-react-site/images/activities.jpg" alt="Activities" height="350" width="625" />
+                        <img src="images/activities.jpg" alt="Activities" height="350" width="625" />
                         <iframe
                             width="625"
                             height="350"

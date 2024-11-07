@@ -19,24 +19,24 @@ function AboutPage() {
                     <div className="contact-info">
                         <h3>Contact Us</h3>
                         <div className="social">
-                            <img src="project-react-site/images/phone.jpg" alt="Phone icon" />
+                            <img src="images/phone.jpg" alt="Phone icon" />
                             <h4>Phone: 225-888-6022</h4>
                         </div>
                         <div className="social">
-                            <img src="project-react-site/images/email.jpg" alt="Email icon" />
+                            <img src="images/email.jpg" alt="Email icon" />
                             <h4>Email: DiscoverVietnam@gmail.com</h4>
                         </div>
                         <div className="social">
-                            <img src="project-react-site/images/insta.webp" alt="Instagram icon" />
+                            <img src="images/insta.webp" alt="Instagram icon" />
                             <h4>Instagram: @DiscoverVietnam</h4>
                         </div>
                         <div className="social">
-                            <img src="project-react-site/images/x.avif" alt="X icon" />
+                            <img src="images/x.avif" alt="X icon" />
                             <h4>X: @DiscoverVietnam</h4>
                         </div>
                     </div>
                     <div className="contact-img">
-                        <img src="project-react-site/images/head.jpeg" alt="Contact" width={300} height={450}/>
+                        <img src="images/head.jpeg" alt="Contact" width={300} height={450}/>
                     </div>
                 </div>
 
