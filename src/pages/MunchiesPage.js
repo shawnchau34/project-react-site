@@ -7,7 +7,7 @@ const munchies = [
     { name: "Bánh mì", image: "images/banhmi.jpg", description: "A popular Vietnamese sandwich.", link: "https://en.wikipedia.org/wiki/Bánh_mì" },
     { name: "Phở", image: "images/pho.jpg", description: "A fragrant noodle soup.", link: "https://en.wikipedia.org/wiki/Phở" },
     { name: "Bún bò Huế", image: "images/bbh.jpg", description: "A spicy beef noodle soup.", link: "https://en.wikipedia.org/wiki/Bún_bò_Huế" },
-    { name: "Bún thịt nướng", image: "images/btn.jpg", description: "Grilled pork with vermicelli.", link: "https://en.wikipedia.org/wiki/Bún_thịt_nướng" }
+    { name: "Bún thịt nướng", image: "giimages/btn.jpg", description: "Grilled pork with vermicelli.", link: "https://en.wikipedia.org/wiki/Bún_thịt_nướng" }
 ];
 
 function MunchiesPage() {
