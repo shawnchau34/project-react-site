@@ -26,7 +26,7 @@ function DiscoverPage() {
             <section className="history-section">
                 <h2>Vietnam's History</h2>
                 <div className="flex-container">
-                    <img src="/images/history.jpg" alt="Vietnam history" height="350" width="350" />
+                    <img src={process.env.PUBLIC_URL + 'project-react-site/images/history.jpg" alt="Vietnam history" height="350" width="350'} />
                     <div className="columns">
                         <p>Vietnam's history is rich and complex, shaped by centuries of cultural influences and conflicts. The country has a long tradition of resilience, having been ruled by various dynasties and foreign powers, including China for over a thousand years. Vietnam's more recent history is marked by its struggle for independence from French colonial rule in the mid-20th century, leading to the Vietnam War, a pivotal conflict between the communist North and the U.S.-backed South. After the war ended in 1975, the country was reunified, and Vietnam has since evolved into a dynamic nation with a vibrant culture and growing economy.</p>
                     </div>

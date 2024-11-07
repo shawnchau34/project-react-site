@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import '../css/Slideshow.css';
 
 const images = [
-    '/images/slideshow/slideshow1.webp',
-    '/images/slideshow/slideshow2.avif',
-    '/images/slideshow/slideshow3.webp',
-    '/images/slideshow/slideshow4.cms',
-    '/images/slideshow/slideshow5.jpg',
-    '/images/slideshow/slideshow6.jpg'
+    'project-react-site/images/slideshow/slideshow1.webp',
+    'project-react-site/images/slideshow/slideshow2.avif',
+    'project-react-site/images/slideshow/slideshow3.webp',
+    'project-react-site/images/slideshow/slideshow4.cms',
+    'project-react-site/images/slideshow/slideshow5.jpg',
+    'project-react-site/images/slideshow/slideshow6.jpg'
 ];
 
 function Slideshow() {

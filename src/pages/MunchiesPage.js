@@ -29,7 +29,7 @@ function MunchiesPage() {
                     <div className="columns">
                         <p>Vietnamese cuisine is known for its balance of flavors—salty, sweet, sour, and spicy—often achieved through the use of fresh herbs, spices, and ingredients like fish sauce, lime, and chili. Popular dishes include pho (a fragrant noodle soup), banh mi (a French-influenced baguette sandwich), and goi cuon (fresh spring rolls). The food is generally light and healthy, with an emphasis on fresh vegetables, rice, and seafood. Regional variations exist, with northern dishes being more subtle, central cuisine spicier, and southern cuisine sweeter.</p>
                     </div>
-                    <img src="/images/cuisine1.webp" alt="Vietnamese Cuisine" width="400" height="250" />
+                    <img src="project-react-site/images/cuisine1.webp" alt="Vietnamese Cuisine" width="400" height="250" />
                 </div>
             </section>
 
