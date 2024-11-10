@@ -1,25 +1,28 @@
 // src/pages/ActivitiesPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
 import '../css/pages-styling/ActivitiesPage.css';
 
-const activities = [
-    { name: "Heritage Line Ylang Cruise", image: "images/cruise.jpg", description: "A luxury cruise through Ha Long Bay.", link: "https://www.example.com/cruise" },
-    { name: "The Marble Mountains", image: "images/mm.jpg", description: "A cluster of marble and limestone hills in Da Nang.", link: "https://www.example.com/marble_mountains" },
-    { name: "Cat Ba Island", image: "images/island.jpg", description: "A serene island with breathtaking landscapes.", link: "https://www.example.com/cat_ba_island" },
-    { name: "The Old Quarter", image: "images/quarter.jpg", description: "A historic area in Hanoi, known for its bustling markets.", link: "https://www.example.com/old_quarter" }
-];
-
-function ActivitiesPage() {
+const ActivitiesPage = () => {
+    const [activities, setActivities] = useState([]);
     const [selectedActivity, setSelectedActivity] = useState(null);
 
-    const openModal = (activity) => {
-        setSelectedActivity(activity);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
+                const data = await response.json();
+                const filteredData = data.filter(item => item.title && item.img_name && item.difficulty_level && item.city);
+                setActivities(filteredData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const closeModal = () => {
-        setSelectedActivity(null);
-    };
+    const openModal = (activity) => setSelectedActivity(activity);
+    const closeModal = () => setSelectedActivity(null);
 
     return (
         <div className="activities-page">
@@ -46,11 +49,16 @@ function ActivitiesPage() {
                 </div>
             </section>
 
+
             <section className="activities-gallery">
                 {activities.map((activity, index) => (
                     <div key={index} className="activity-card" onClick={() => openModal(activity)}>
-                        <img src={activity.image} alt={activity.name} />
-                        <h3>{activity.name}</h3>
+                        <img src={activity.img_name} alt={activity.title} />
+                        <h3>
+                            <a href={activity.link} target="_blank" rel="noopener noreferrer">
+                                {activity.title}
+                            </a>
+                        </h3>
                     </div>
                 ))}
             </section>

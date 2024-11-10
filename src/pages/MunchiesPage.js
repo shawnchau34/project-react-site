@@ -1,25 +1,29 @@
 // src/pages/MunchiesPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
 import '../css/pages-styling/MunchiesPage.css';
 
-const munchies = [
-    { name: "Bánh mì", image: "images/banhmi.jpg", description: "A popular Vietnamese sandwich.", link: "https://en.wikipedia.org/wiki/Bánh_mì" },
-    { name: "Phở", image: "images/pho.jpg", description: "A fragrant noodle soup.", link: "https://en.wikipedia.org/wiki/Phở" },
-    { name: "Bún bò Huế", image: "images/bbh.jpg", description: "A spicy beef noodle soup.", link: "https://en.wikipedia.org/wiki/Bún_bò_Huế" },
-    { name: "Bún thịt nướng", image: "giimages/btn.jpg", description: "Grilled pork with vermicelli.", link: "https://en.wikipedia.org/wiki/Bún_thịt_nướng" }
-];
+const MunchiesPage = () => {
+    const [munchies, setMunchies] = useState([]);
+    const [selectedMunchie, setSelectedMunchie] = useState(null);
 
-function MunchiesPage() {
-    const [selectedDish, setSelectedDish] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
+                const data = await response.json();
+                // Filter data specific to food/munchies (adjust criteria as needed)
+                const filteredData = data.filter(item => item.title && item.img_name && item.ingredients && item.region);
+                setMunchies(filteredData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const openModal = (dish) => {
-        setSelectedDish(dish);
-    };
-
-    const closeModal = () => {
-        setSelectedDish(null);
-    };
+    const openModal = (dish) => setSelectedMunchie(dish);
+    const closeModal = () => setSelectedMunchie(null);
 
     return (
         <div className="munchies-page">
@@ -53,18 +57,22 @@ function MunchiesPage() {
             </section>
 
             <section className="food-gallery">
-                {munchies.map((dish, index) => (
-                    <div key={index} className="food-card" onClick={() => openModal(dish)}>
-                        <img src={dish.image} alt={dish.name} width="225" height="100" />
-                        <h3>{dish.name}</h3>
+                {munchies.map((munchie, index) => (
+                    <div key={index} className="food-card" onClick={() => openModal(munchie)}>
+                        <img src={munchie.img_name} alt={munchie.title} />
+                        <h3>
+                            <a href={munchie.link} target="_blank" rel="noopener noreferrer">
+                                {munchie.title}
+                            </a>
+                        </h3>
                     </div>
                 ))}
             </section>
 
             <Modal
-                show={selectedDish !== null}
+                show={selectedMunchie !== null}
                 onClose={closeModal}
-                landmark={selectedDish}
+                landmark={selectedMunchie}
             />
         </div>
     );

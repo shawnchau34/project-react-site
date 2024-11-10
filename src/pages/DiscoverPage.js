@@ -1,25 +1,28 @@
 // src/pages/DiscoverPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
 import '../css/pages-styling/DiscoverPage.css';
 
-const landmarks = [
-    { name: "Ho Chi Minh City", image: "images/hcm.jpg", description: "A vibrant city with rich history.", link: "https://en.wikipedia.org/wiki/Ho_Chi_Minh_City" },
-    { name: "Saigon", image: "images/saigon.jpeg", description: "The largest city in Vietnam, full of life.", link: "https://en.wikipedia.org/wiki/Saigon" },
-    { name: "Hanoi", image: "images/temple.jpg", description: "The capital city, blending history and modernity.", link: "https://en.wikipedia.org/wiki/Hanoi" },
-    { name: "Hạ Long Bay", image: "images/discoverbay.jpg", description: "Famous for its emerald waters and limestone islands.", link: "https://en.wikipedia.org/wiki/H%E1%BA%A1_Long_Bay" }
-];
-
-function DiscoverPage() {
+const DiscoverPage = () => {
+    const [landmarks, setLandmarks] = useState([]);
     const [selectedLandmark, setSelectedLandmark] = useState(null);
 
-    const openModal = (landmark) => {
-        setSelectedLandmark(landmark);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
+                const data = await response.json();
+                const filteredData = data.filter(item => item.title && item.img_name && item.historical_significance);
+                setLandmarks(filteredData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const closeModal = () => {
-        setSelectedLandmark(null);
-    };
+    const openModal = (landmark) => setSelectedLandmark(landmark);
+    const closeModal = () => setSelectedLandmark(null);
 
     return (
         <div className="discover-page">
@@ -56,8 +59,12 @@ function DiscoverPage() {
             <section className="landmarks-gallery">
                 {landmarks.map((landmark, index) => (
                     <div key={index} className="landmark-card" onClick={() => openModal(landmark)}>
-                        <img src={landmark.image} alt={landmark.name} width="195" height="100" />
-                        <h3>{landmark.name}</h3>
+                        <img src={landmark.img_name} alt={landmark.title} width="195" height="100" />
+                        <h3>
+                            <a href={landmark.link} target="_blank" rel="noopener noreferrer">
+                                {landmark.title}
+                            </a>
+                        </h3>
                     </div>
                 ))}
             </section>
