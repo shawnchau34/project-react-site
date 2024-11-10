@@ -1,5 +1,6 @@
 // src/pages/AboutPage.js
 import React from 'react';
+import ContactForm from '../components/ContactForm';
 import '../css/pages-styling/AboutPage.css';
 
 function AboutPage() {
@@ -40,44 +41,7 @@ function AboutPage() {
                     </div>
                 </div>
 
-                <div className="contact-form">
-                    <h5>Contact Me</h5>
-                    <p className="header-message">If you would like to leave a message of any type with recommendations for other travelers, please fill out the form below.</p>
-                    <form id="contact-me" action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="4d14963e-1148-4834-a0a9-3da20bb0889e" />
-                        
-                        <div id="contact-input" className="flex-container">
-                            <p>
-                                <label htmlFor="first-name">First Name:</label>
-                                <input type="text" id="first-name" name="first_name" required placeholder="John" minLength="3" />
-                            </p>
-                            <p>
-                                <label htmlFor="last-name">Last Name:</label>
-                                <input type="text" id="last-name" name="last_name" required placeholder="Doe" minLength="3" />
-                            </p>
-                        </div>
-                        <div id="contact-input" className="flex-container">
-                            <p>
-                                <label htmlFor="email">Email Address:</label>
-                                <input type="email" id="email" name="email" required placeholder="user@email.com" />
-                            </p>
-                            <p>
-                                <label htmlFor="phone">Phone Number:</label>
-                                <input type="tel" id="phone" name="phone" placeholder="123-456-7890" />
-                            </p>
-                        </div>
-                        <div id="contact-input" className="flex-container">
-                            <p>
-                                <label htmlFor="message">Message:</label>
-                                <textarea id="message" name="message" required placeholder="Please Enter Your Message"></textarea>
-                            </p>
-                        </div>
-                        <p>
-                            <button id="contact-submit-button" type="submit">Submit</button>
-                        </p>
-                    </form>
-                    <div id="results"></div>
-                </div>
+                <ContactForm/>
             </section>
         </div>
     );
