@@ -1,26 +1,33 @@
 // src/pages/MunchiesPage.js
 import React, { useEffect, useState } from 'react';
+import AddItemForm from '../components/AddItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/MunchiesPage.css';
 
 const MunchiesPage = () => {
     const [munchies, setMunchies] = useState([]);
     const [selectedMunchie, setSelectedMunchie] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false);
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
+            const data = await response.json();
+            // Filter data specific to food/munchies (adjust criteria as needed)
+            const filteredData = data.filter(item => item.title && item.img_name && item.ingredients && item.region);
+            setMunchies(filteredData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
-                const data = await response.json();
-                // Filter data specific to food/munchies (adjust criteria as needed)
-                const filteredData = data.filter(item => item.title && item.img_name && item.ingredients && item.region);
-                setMunchies(filteredData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
         fetchData();
     }, []);
+
+    const handleAddSuccess = () => {
+        fetchData(); // Refresh data after adding a new item
+    };
 
     const openModal = (dish) => setSelectedMunchie(dish);
     const closeModal = () => setSelectedMunchie(null);
@@ -69,6 +76,13 @@ const MunchiesPage = () => {
                 ))}
             </section>
 
+            {/* New Button to Toggle the Add Form */}
+            <button onClick={() => setShowAddForm(!showAddForm)}>
+                {showAddForm ? 'Cancel' : 'Add Food Item'}
+            </button>
+
+            {/* New Add Form */}
+            {showAddForm && <AddItemForm type="food" onAddSuccess={handleAddSuccess} closeForm={()=> setShowAddForm(false)}/>}
             <Modal
                 show={selectedMunchie !== null}
                 onClose={closeModal}

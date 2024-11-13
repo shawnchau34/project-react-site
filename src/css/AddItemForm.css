@@ -1,0 +1,107 @@
+/* AddItemForm.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.add-item-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #d9534f;
+}
+
+.add-item-form-container h3 {
+    margin-bottom: 16px;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.add-item-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.add-item-form-container input[type="text"],
+.add-item-form-container textarea,
+.add-item-form-container input[type="file"],
+.add-item-form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.add-item-form-container textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.add-item-form-container input[type="file"] {
+    padding: 5px;
+}
+
+.add-item-form-container button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-item-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: #d9534f;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.success-message {
+    color: #5cb85c;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}

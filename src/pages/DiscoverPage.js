@@ -1,25 +1,32 @@
 // src/pages/DiscoverPage.js
 import React, { useEffect, useState } from 'react';
+import AddItemForm from '../components/AddItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/DiscoverPage.css';
 
 const DiscoverPage = () => {
     const [landmarks, setLandmarks] = useState([]);
     const [selectedLandmark, setSelectedLandmark] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false);
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
+            const data = await response.json();
+            const filteredData = data.filter(item => item.title && item.img_name && item.historical_significance);
+            setLandmarks(filteredData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
-                const data = await response.json();
-                const filteredData = data.filter(item => item.title && item.img_name && item.historical_significance);
-                setLandmarks(filteredData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
         fetchData();
     }, []);
+
+    const handleAddSuccess = () => {
+        fetchData(); // Refresh data after adding a new landmark
+    };
 
     const openModal = (landmark) => setSelectedLandmark(landmark);
     const closeModal = () => setSelectedLandmark(null);
@@ -69,6 +76,13 @@ const DiscoverPage = () => {
                 ))}
             </section>
 
+ {/* New Button to Toggle the Add Form */}
+ <button onClick={() => setShowAddForm(!showAddForm)}>
+                {showAddForm ? 'Cancel' : 'Add Landmark'}
+            </button>
+
+            {/* New Add Form */}
+            {showAddForm && <AddItemForm type="landmark" onAddSuccess={handleAddSuccess} closeForm={()=> setShowAddForm(false)}/>}
             <Modal
                 show={selectedLandmark !== null}
                 onClose={closeModal}
