@@ -13,17 +13,15 @@
     z-index: 1000;
 }
 
-.delete-item-form-container {
+.delete-form-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    max-width: 500px;
+    max-width: 400px;
     width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     text-align: center;
-    max-height: 70vh;
-    overflow-y: auto;
 }
 
 .close-button {
@@ -42,62 +40,54 @@
     color: #d9534f;
 }
 
-.delete-item-form-container h3 {
+.delete-form-container h3 {
     margin-bottom: 16px;
     color: #333;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
+    font-size: 1.2rem;
 }
 
-.delete-item-form-container p {
-    margin-bottom: 20px;
-    font-size: 1rem;
-    color: #555;
-}
-
-.delete-item-form-container .button-group {
+.delete-buttons {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
-.delete-item-form-container button {
+.cancel-button {
     padding: 10px 20px;
-    border-radius: 4px;
+    background-color: #f5f5f5;
+    color: #555;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;
     transition: background-color 0.3s ease;
-    width: 45%;
 }
 
-.delete-item-form-container button.cancel-button {
+.cancel-button:hover {
+    background-color: #ddd;
+}
+
+.delete-button {
+    padding: 10px 20px;
     background-color: #d9534f;
     color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.delete-item-form-container button.cancel-button:hover {
+.delete-button:hover {
     background-color: #c9302c;
-}
-
-.delete-item-form-container button.confirm-button {
-    background-color: #5cb85c;
-    color: white;
-}
-
-.delete-item-form-container button.confirm-button:hover {
-    background-color: #4cae4c;
-}
-
-.success-message {
-    color: #5cb85c;
-    margin-top: 12px;
-    font-size: 0.9rem;
 }
 
 .error-message {
     color: #d9534f;
-    margin-top: 12px;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.success-message {
+    color: #5cb85c;
+    margin-top: 8px;
     font-size: 0.9rem;
 }

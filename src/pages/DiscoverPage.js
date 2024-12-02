@@ -1,6 +1,7 @@
 // src/pages/DiscoverPage.js
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
+import DeleteItemForm from '../components/DeleteItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/DiscoverPage.css';
 
@@ -8,6 +9,9 @@ const DiscoverPage = () => {
     const [landmarks, setLandmarks] = useState([]);
     const [selectedLandmark, setSelectedLandmark] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [landmarkToDelete, setLandmarkToDelete] = useState(null);
+
 
     const fetchData = async () => {
         try {
@@ -26,6 +30,20 @@ const DiscoverPage = () => {
 
     const handleAddSuccess = () => {
         fetchData(); // Refresh data after adding a new landmark
+    };
+
+    const handleDeleteSuccess = () => {
+        fetchData(); // Refresh the data after deletion
+    };
+
+    const openDeleteDialog = (activity) => {
+        setLandmarkToDelete(activity);
+        setShowDeleteDialog(true);
+    };
+    
+    const closeDeleteDialog = () => {
+        setShowDeleteDialog(false);
+        setLandmarkToDelete(null);
     };
 
     const openModal = (landmark) => setSelectedLandmark(landmark);
@@ -72,6 +90,7 @@ const DiscoverPage = () => {
                                 {landmark.title}
                             </a>
                         </h3>
+                        <button onClick={() => openDeleteDialog(landmark)}>Delete</button>
                     </div>
                 ))}
             </section>
@@ -88,6 +107,15 @@ const DiscoverPage = () => {
                 onClose={closeModal}
                 landmark={selectedLandmark}
             />
+
+            {showDeleteDialog && landmarkToDelete && (
+                <DeleteItemForm
+                    id={landmarkToDelete._id}
+                    name={landmarkToDelete.title}
+                    onDeleteSuccess={handleDeleteSuccess}
+                    closeDialog={closeDeleteDialog}
+                />
+            )}
         </div>
     );
 }

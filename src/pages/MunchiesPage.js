@@ -1,6 +1,7 @@
 // src/pages/MunchiesPage.js
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
+import DeleteItemForm from '../components/DeleteItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/MunchiesPage.css';
 
@@ -8,6 +9,8 @@ const MunchiesPage = () => {
     const [munchies, setMunchies] = useState([]);
     const [selectedMunchie, setSelectedMunchie] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [munchieToDelete, setMunchieToDelete] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -29,6 +32,19 @@ const MunchiesPage = () => {
         fetchData(); // Refresh data after adding a new item
     };
 
+    const handleDeleteSuccess = () => {
+        fetchData(); // Refresh the data after deletion
+    };
+
+    const openDeleteDialog = (activity) => {
+        setMunchieToDelete(activity);
+        setShowDeleteDialog(true);
+    };
+    
+    const closeDeleteDialog = () => {
+        setShowDeleteDialog(false);
+        setMunchieToDelete(null);
+    };
     const openModal = (dish) => setSelectedMunchie(dish);
     const closeModal = () => setSelectedMunchie(null);
 
@@ -72,6 +88,8 @@ const MunchiesPage = () => {
                                 {munchie.title}
                             </a>
                         </h3>
+                        <button onClick={() => openDeleteDialog(munchie)}>Delete</button>
+
                     </div>
                 ))}
             </section>
@@ -88,6 +106,15 @@ const MunchiesPage = () => {
                 onClose={closeModal}
                 landmark={selectedMunchie}
             />
+            
+            {showDeleteDialog && munchieToDelete && (
+                <DeleteItemForm
+                    id={munchieToDelete._id}
+                    name={munchieToDelete.title}
+                    onDeleteSuccess={handleDeleteSuccess}
+                    closeDialog={closeDeleteDialog}
+                />
+            )}
         </div>
     );
 }
