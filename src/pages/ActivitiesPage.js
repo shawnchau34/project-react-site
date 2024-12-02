@@ -1,6 +1,7 @@
 // src/pages/ActivitiesPage.js
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
+import DeleteItemForm from '../components/DeleteItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/ActivitiesPage.css';
 
@@ -8,6 +9,9 @@ const ActivitiesPage = () => {
     const [activities, setActivities] = useState([]);
     const [selectedActivity, setSelectedActivity] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [activityToDelete, setActivityToDelete] = useState(null);
+
 
     const fetchData = async () => {
         try {
@@ -29,6 +33,19 @@ const ActivitiesPage = () => {
         fetchData(); // 
     };
 
+    const handleDeleteSuccess = () => {
+        fetchData(); // Refresh the data after deletion
+    };
+
+    const openDeleteDialog = (activity) => {
+        setActivityToDelete(activity);
+        setShowDeleteDialog(true);
+    };
+    
+    const closeDeleteDialog = () => {
+        setShowDeleteDialog(false);
+        setActivityToDelete(null);
+    };
 
     const openModal = (activity) => setSelectedActivity(activity);
     const closeModal = () => setSelectedActivity(null);
@@ -68,18 +85,28 @@ const ActivitiesPage = () => {
                                 {activity.title}
                             </a>
                         </h3>
+                        <button onClick={() => openDeleteDialog(activity)}>Delete</button>
                     </div>
                 ))}
             </section>
 
             
             {/* New Button to Toggle the Add Form */}
-            <button classname="add-activity-button" onClick={() => setShowAddForm(!showAddForm)}>
+            <button className="add-activity-button" onClick={() => setShowAddForm(!showAddForm)}>
                 {showAddForm ? 'Cancel' : 'Add Activity'}
             </button>
 
             {/* New Add Form */}
             {showAddForm && <AddItemForm type="activity" onAddSuccess={handleAddSuccess} closeForm={()=> setShowAddForm(false)}/>}
+
+            {showDeleteDialog && activityToDelete && (
+                <DeleteItemForm
+                    id={activityToDelete._id}
+                    name={activityToDelete.title}
+                    onDeleteSuccess={handleDeleteSuccess}
+                    closeDialog={closeDeleteDialog}
+                />
+            )}
 
             <Modal
                 show={selectedActivity !== null}
