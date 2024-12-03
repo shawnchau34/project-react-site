@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
 import DeleteItemForm from '../components/DeleteItemForm';
+import EditItemForm from '../components/EditItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/DiscoverPage.css';
 
@@ -10,8 +11,9 @@ const DiscoverPage = () => {
     const [selectedLandmark, setSelectedLandmark] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [showEditDialog, setShowEditDialog] = useState(false);
     const [landmarkToDelete, setLandmarkToDelete] = useState(null);
-
+    const [landmarkToEdit, setLandmarkToEdit] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -36,11 +38,30 @@ const DiscoverPage = () => {
         fetchData(); // Refresh the data after deletion
     };
 
-    const openDeleteDialog = (activity) => {
-        setLandmarkToDelete(activity);
+    const handleEditSuccess = (updatedLandmark) => {
+        setLandmarks((prevLandmarks) =>
+            prevLandmarks.map((landmark) =>
+                landmark._id === updatedLandmark._id ? updatedLandmark : landmark
+            )
+        );
+        setShowEditDialog(false); // Close the edit dialog
+    };
+
+    const openEditDialog = (landmark) => {
+        setLandmarkToEdit(landmark); // Set the item to edit
+        setShowEditDialog(true); // Open the edit dialog
+    };
+
+    const closeEditDialog = () => {
+        setShowEditDialog(false); // Close the edit dialog
+        setLandmarkToEdit(null); // Clear the item to edit
+    };
+
+    const openDeleteDialog = (landmark) => {
+        setLandmarkToDelete(landmark);
         setShowDeleteDialog(true);
     };
-    
+
     const closeDeleteDialog = () => {
         setShowDeleteDialog(false);
         setLandmarkToDelete(null);
@@ -56,7 +77,7 @@ const DiscoverPage = () => {
                 <div className="flex-container">
                     <img src="images/history.jpg" alt="Vietnam history" height="350" width="350" />
                     <div className="columns">
-                        <p>Vietnam's history is rich and complex, shaped by centuries of cultural influences and conflicts. The country has a long tradition of resilience, having been ruled by various dynasties and foreign powers, including China for over a thousand years. Vietnam's more recent history is marked by its struggle for independence from French colonial rule in the mid-20th century, leading to the Vietnam War, a pivotal conflict between the communist North and the U.S.-backed South. After the war ended in 1975, the country was reunified, and Vietnam has since evolved into a dynamic nation with a vibrant culture and growing economy.</p>
+                        <p>Vietnam's history is rich and complex...</p>
                     </div>
                 </div>
             </section>
@@ -65,7 +86,7 @@ const DiscoverPage = () => {
                 <h2>Breathtaking Landmarks</h2>
                 <div className="flex-container">
                     <div className="columns">
-                        <p>Vietnam boasts numerous iconic landmarks that highlight its historical and cultural significance. Ha Long Bay, known for its emerald waters and limestone karsts, stands as a UNESCO World Heritage site and a symbol of Vietnam's natural beauty. The ancient capital of Hue, with its imperial citadel, reflects the country’s royal heritage, while the My Son Sanctuary offers a glimpse into the ancient Champa civilization. Additionally, the Cu Chi Tunnels near Ho Chi Minh City tell a powerful story of Vietnam's resistance during the war, making these landmarks deeply intertwined with the nation’s history.</p>
+                        <p>Vietnam boasts numerous iconic landmarks...</p>
                     </div>
                     <div className="video-container">
                         <iframe
@@ -90,24 +111,47 @@ const DiscoverPage = () => {
                                 {landmark.title}
                             </a>
                         </h3>
-                        <button onClick={() => openDeleteDialog(landmark)}>Delete</button>
+                        {/* Edit Button */}
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent triggering the modal
+                                openEditDialog(landmark);
+                            }}
+                        >
+                            Edit
+                        </button>
+                        {/* Delete Button */}
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent triggering the modal
+                                openDeleteDialog(landmark);
+                            }}
+                        >
+                            Delete
+                        </button>
                     </div>
                 ))}
             </section>
 
- {/* New Button to Toggle the Add Form */}
- <button onClick={() => setShowAddForm(!showAddForm)}>
+            {/* New Button to Toggle the Add Form */}
+            <button onClick={() => setShowAddForm(!showAddForm)}>
                 {showAddForm ? 'Cancel' : 'Add Landmark'}
             </button>
 
             {/* New Add Form */}
-            {showAddForm && <AddItemForm type="landmark" onAddSuccess={handleAddSuccess} closeForm={()=> setShowAddForm(false)}/>}
-            <Modal
-                show={selectedLandmark !== null}
-                onClose={closeModal}
-                landmark={selectedLandmark}
-            />
+            {showAddForm && <AddItemForm type="landmark" onAddSuccess={handleAddSuccess} closeForm={() => setShowAddForm(false)} />}
+            
+            {/* Edit Form */}
+            {showEditDialog && landmarkToEdit && (
+                <EditItemForm
+                    item={landmarkToEdit}
+                    type="landmark"
+                    onEditSuccess={handleEditSuccess}
+                    closeDialog={closeEditDialog}
+                />
+            )}
 
+            {/* Delete Dialog */}
             {showDeleteDialog && landmarkToDelete && (
                 <DeleteItemForm
                     id={landmarkToDelete._id}
@@ -116,8 +160,11 @@ const DiscoverPage = () => {
                     closeDialog={closeDeleteDialog}
                 />
             )}
+
+            {/* Landmark Modal */}
+            <Modal show={selectedLandmark !== null} onClose={closeModal} landmark={selectedLandmark} />
         </div>
     );
-}
+};
 
 export default DiscoverPage;

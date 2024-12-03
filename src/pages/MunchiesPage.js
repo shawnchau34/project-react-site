@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
 import DeleteItemForm from '../components/DeleteItemForm';
+import EditItemForm from '../components/EditItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/MunchiesPage.css';
 
@@ -11,13 +12,15 @@ const MunchiesPage = () => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [munchieToDelete, setMunchieToDelete] = useState(null);
+    const [munchieToEdit, setMunchieToEdit] = useState(null);
+    const [showEditDialog, setShowEditDialog] = useState(false);
 
     const fetchData = async () => {
         try {
             const response = await fetch('https://serverside-0s0d.onrender.com/api/house_plans');
             const data = await response.json();
             // Filter data specific to food/munchies (adjust criteria as needed)
-            const filteredData = data.filter(item => item.title && item.img_name && item.ingredients && item.region);
+            const filteredData = data.filter(item => item.title && item.img_name && (item.ingredients || []).length > 0 && item.region);
             setMunchies(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -34,6 +37,25 @@ const MunchiesPage = () => {
 
     const handleDeleteSuccess = () => {
         fetchData(); // Refresh the data after deletion
+    };
+
+    const handleEditSuccess = (updatedMunchie) => {
+        setMunchies((prevMunchies) =>
+            prevMunchies.map((munchie) =>
+                munchie._id === updatedMunchie._id ? updatedMunchie : munchie
+            )
+        );
+        setShowEditDialog(false); // Close the edit dialog
+    };
+
+    const openEditDialog = (munchie) => {
+        setMunchieToEdit(munchie); // Set the item to edit
+        setShowEditDialog(true); // Open the edit dialog
+    };
+
+    const closeEditDialog = () => {
+        setShowEditDialog(false); // Close the edit dialog
+        setMunchieToEdit(null); // Clear the item to edit
     };
 
     const openDeleteDialog = (activity) => {
@@ -88,8 +110,24 @@ const MunchiesPage = () => {
                                 {munchie.title}
                             </a>
                         </h3>
-                        <button onClick={() => openDeleteDialog(munchie)}>Delete</button>
-
+            {/* Edit Button */}
+            <button
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering the modal
+                    openEditDialog(munchie);
+                }}
+            >
+                Edit
+            </button>
+            {/* Delete Button */}
+            <button
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering the modal
+                    openDeleteDialog(munchie);
+                }}
+            >
+                Delete
+            </button>
                     </div>
                 ))}
             </section>
@@ -106,6 +144,15 @@ const MunchiesPage = () => {
                 onClose={closeModal}
                 landmark={selectedMunchie}
             />
+
+            {showEditDialog && munchieToEdit && (
+                <EditItemForm
+                    item={munchieToEdit}
+                    type="munchies"
+                    onEditSuccess={handleEditSuccess}
+                    closeDialog={closeEditDialog}
+                />
+            )}
             
             {showDeleteDialog && munchieToDelete && (
                 <DeleteItemForm
@@ -115,6 +162,12 @@ const MunchiesPage = () => {
                     closeDialog={closeDeleteDialog}
                 />
             )}
+
+            <Modal
+                show={selectedMunchie !== null}
+                onClose={closeModal}
+                landmark={selectedMunchie}
+            />
         </div>
     );
 }

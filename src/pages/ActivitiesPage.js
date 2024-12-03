@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import AddItemForm from '../components/AddItemForm';
 import DeleteItemForm from '../components/DeleteItemForm';
+import EditItemForm from '../components/EditItemForm';
 import Modal from '../components/Modal';
 import '../css/pages-styling/ActivitiesPage.css';
 
@@ -11,6 +12,8 @@ const ActivitiesPage = () => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [activityToDelete, setActivityToDelete] = useState(null);
+    const [showEditDialog, setShowEditDialog] = useState(false);
+    const [activityToEdit, setActivityToEdit] = useState(null);
 
 
     const fetchData = async () => {
@@ -35,6 +38,24 @@ const ActivitiesPage = () => {
 
     const handleDeleteSuccess = () => {
         fetchData(); // Refresh the data after deletion
+    };
+
+    const handleEditSuccess = (updatedActivity) => {
+        setActivities((prev) =>
+            prev.map((activity) =>
+                activity._id === updatedActivity._id ? updatedActivity : activity
+            )
+        );
+    };
+
+    const openEditDialog = (activity) => {
+        setActivityToEdit(activity);
+        setShowEditDialog(true);
+    };
+
+    const closeEditDialog = () => {
+        setShowEditDialog(false);
+        setActivityToEdit(null);
     };
 
     const openDeleteDialog = (activity) => {
@@ -85,7 +106,22 @@ const ActivitiesPage = () => {
                                 {activity.title}
                             </a>
                         </h3>
-                        <button onClick={() => openDeleteDialog(activity)}>Delete</button>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                openEditDialog(activity);
+                            }}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                openDeleteDialog(activity);
+                            }}
+                        >
+                            Delete
+                        </button>
                     </div>
                 ))}
             </section>
@@ -98,6 +134,17 @@ const ActivitiesPage = () => {
 
             {/* New Add Form */}
             {showAddForm && <AddItemForm type="activity" onAddSuccess={handleAddSuccess} closeForm={()=> setShowAddForm(false)}/>}
+
+
+            {showEditDialog && activityToEdit && (
+                <EditItemForm
+                    item={activityToEdit}
+                    type="activity"
+                    onEditSuccess={handleEditSuccess}
+                    closeDialog={closeEditDialog}
+                />
+            )}
+
 
             {showDeleteDialog && activityToDelete && (
                 <DeleteItemForm
