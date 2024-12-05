@@ -14,7 +14,9 @@ function Header() {
         <header id="main-header">
             <div className="flex-container">
                 <div className="logo">
-                    <a href="#"><img src="images/flag.jpg" width="50" height="50" alt="Vietnam flag" /></a>
+                    <Link to="/">
+                        <img src="images/flag.jpg" width="50" height="50" alt="Vietnam flag" />
+                    </Link>                    
                     <h1>Vietnam: Discover Culture and Tradition</h1>
                 </div>
                 <button id="hamburger-menu" onClick={toggleMenu}>
